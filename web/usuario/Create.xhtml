@@ -24,7 +24,8 @@
                                     <f:selectItem itemValue="Azul" itemLabel="Azul"/>
                                     <f:selectItem itemValue="Verde" itemLabel="Verde"/>
                                     <f:selectItem itemValue="Rojo" itemLabel="Rojo"/>
-                                </p:selectOneMenu> <p:outputLabel value="#{bundle.CreateUsuarioLabel_tipoUsuario}" for="tipoUsuario" />
+                                </p:selectOneMenu>
+                       <p:outputLabel value="#{bundle.CreateUsuarioLabel_tipoUsuario}" for="tipoUsuario" />
                         <p:selectOneMenu id="tipoUsuario" value="#{usuarioController.selected.tipoUsuario}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_tipoUsuario}">
                             <f:selectItems value="#{tipoUsuarioController.itemsAvailableSelectOne}"
                                            var="tipoUsuarioItem"

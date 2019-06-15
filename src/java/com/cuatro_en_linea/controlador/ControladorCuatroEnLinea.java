@@ -37,6 +37,7 @@ public class ControladorCuatroEnLinea implements Serializable {
 
     private boolean estadoJuego = false;
     private Date fechaSistema;
+    private int numero ;
     private List<Vertice> vertices;
 
     private int ancho = 7;
@@ -88,6 +89,7 @@ public class ControladorCuatroEnLinea implements Serializable {
                 for (int j = 1; j <= ancho; j++) {
                     tablero.adicionarVertice(new Ficha(color, "k" + (k + 1)));
                     Element ceo = new Element(tablero.getVertices().size(), x + "em", y + "em");
+                    ceo.setId(String.valueOf(tablero.getVertices().size()));
                     ceo.setDraggable(false);
                     ceo.setStyleClass(styleColor);
                     ceo.addEndPoint(new BlankEndPoint(EndPointAnchor.CENTER));
@@ -134,23 +136,44 @@ public class ControladorCuatroEnLinea implements Serializable {
                 tablero.adicionarVertice(new Ficha(color, "k" + (k + 1)));
                 Element ceo = new Element(tablero.getVertices().size(), x + "em", y + "em");
                 ceo.setDraggable(false);
-                ceo.addEndPoint(new BlankEndPoint(EndPointAnchor.CENTER));
+              
+        
+          ceo.addEndPoint(new BlankEndPoint(EndPointAnchor.CENTER));
                 model.addElement(ceo);
 
             }
         }
     }
 
-    public void jugada(int idFicha) {
-        int cont = 0;
-        if (tablero.getVertices().get(idFicha - 1).getFicha().getColor().compareTo("gris") == 0) {
-            cont = idFicha + ancho;           
-        } else {
-            cont = idFicha - ancho;
-            tablero.getVertices().get(idFicha - 1).getFicha().setColor("rosado");
+    public void multipo(){
+        for(Vertice vert:tablero.getVertices()){
+        if(vert.getId() % numero ==0 ){
+            String styleColor = "ui-diagram-element-ficha-rosado";
+            model.getElements().get(vert.getId()-1).setStyleClass(styleColor);
+        }else{
+            String styleColor = "ui-diagram-element-ficha-gris";
+            model.getElements().get(vert.getId()-1).setStyleClass(styleColor);
         }
+    }
+    }
+    
+    public void jugada(int idFicha) {
+        Vertice vert=tablero.getVertices().get(idFicha-1);
         
-
+        
+//        int cont = 0;
+//        for (Vertice vert : vertices) {
+//
+//            if (vert.getId() == idFicha && tablero.getVertices().get(idFicha - 1).getFicha().getColor().compareTo("gris") == 0) {
+//
+//                cont = idFicha + ancho;
+//            } else {
+//                cont = idFicha - ancho;
+//                tablero.getVertices().get(idFicha - 1).getFicha().setColor("rosado");
+//            }
+//            JsfUtil.addSuccessMessage("Elija otra jugada");
+//        }
+        
     }
 
     public byte getDistancia() {
@@ -224,5 +247,14 @@ public class ControladorCuatroEnLinea implements Serializable {
     public void setVertices(List<Vertice> vertices) {
         this.vertices = vertices;
     }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    
 
 }
